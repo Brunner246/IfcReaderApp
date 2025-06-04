@@ -12,16 +12,14 @@ public class IfcProcessor : IIfcProcessor
         _reader = reader;
     }
 
-    public Task ProcessAsync(string filePath)
+    public async Task ProcessAsync(string filePath)
     {
-        var entityCounts = _reader.GetEntityCounts(filePath);
+        var entityCounts = await _reader.GetEntityCountsAsync(filePath);
 
         Console.WriteLine("== IFC Entity Type Counts ==");
         foreach (var count in entityCounts.OrderByDescending(e => e.Count))
         {
             Console.WriteLine($"{count.EntityType}: {count.Count}");
         }
-
-        return Task.CompletedTask;
     }
 }

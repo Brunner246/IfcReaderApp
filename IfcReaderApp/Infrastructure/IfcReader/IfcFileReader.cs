@@ -13,8 +13,8 @@ public class IfcFileReader : IIfcFileReader
 
         foreach (var instance in instances)
         {
-           string name = instance.ExpressType.ExpressName;
-           Console.WriteLine($"Processing entity: {name}");
+            string name = instance.ExpressType.ExpressName;
+            Console.WriteLine($"Processing entity: {name}");
         }
 
         var groups = instances
@@ -27,5 +27,10 @@ public class IfcFileReader : IIfcFileReader
             .ToList();
 
         return groups;
+    }
+
+    public Task<List<EntityCount>> GetEntityCountsAsync(string filePath)
+    {
+        return Task.Run(() => GetEntityCounts(filePath));
     }
 }
